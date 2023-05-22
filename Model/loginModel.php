@@ -1,22 +1,22 @@
 <?php
-require_once 'config\connection.php';
-class LoginModel
-{
+require_once 'C:\xampp\htdocs\validaciones_php\config\connection.php';
 
-    private $database;
+class LoginModel extends DBAbstractModel {
 
-    public function __construct()
-    {
-        $this->database = connection::conectar();
+    public function __construct(){
+        $this->connect();
     }
+    protected $table = 'login';
+    public function validarUsuario($user, $password) {
+        $query = "SELECT * FROM $this->table WHERE user = '$user' AND password = '$password'";
+        $result = $this->conn->query($query);
 
-    public function validarUsuario($user, $password)
-    {
-        $statement = $this->database->prepare("SELECT * FROM login WHERE user=:user AND password=:password");
-        $statement->bindParam(":user", $user);
-        $statement->bindParam(":password", $password);
-        $statement->execute();
-
-        return $statement->fetch(PDO::FETCH_ASSOC);
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            return $row;
+        } else {
+            return null;
+        }
     }
 }
+?>

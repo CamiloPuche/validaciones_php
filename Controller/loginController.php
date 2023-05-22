@@ -43,7 +43,7 @@ class LoginController
     {
         session_start();
 
-        if (isset($_SESSION['usuario'])) {
+        if (isset($_SESSION['user']) && $_SESSION['user']['rol'] == 'Usuario') {
             require_once 'C:\xampp\htdocs\validaciones_php\View\User\homeUser.php';
         } else {
             header('Location: index.php');
