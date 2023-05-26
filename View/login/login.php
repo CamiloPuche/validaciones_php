@@ -2,7 +2,7 @@
 <html lang="es">
 
 <head>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="View\login\index.css">
     <title>Login</title>
 
 </head>
